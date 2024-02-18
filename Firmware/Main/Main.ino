@@ -29,6 +29,11 @@ void setup()
     // }
 
     // server.begin();
+    // set the speed and acceleration
+    stepper.setMaxSpeed(500);
+    stepper.setAcceleration(100);
+    // set target position
+    stepper.moveTo(stepsPerRevolution);
     pinMode(trigPin, OUTPUT);
     pinMode(echoPin, INPUT);
     servo1.attach(servoPin, 500, 2400);
@@ -116,12 +121,15 @@ void loop()
         // open the lid
         openLid();
     }
-
-    if (!monitor() && timeCounter())
+    // Serial.println(monitor());
+    if (!monitor())
     {
+      if (timeCounter()) {
         closeLid();
         lock_pos();
         lockDoor = true;
+      }
+
     }
     delay(1000);
 }

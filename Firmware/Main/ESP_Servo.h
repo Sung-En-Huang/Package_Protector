@@ -3,7 +3,7 @@
 
 #include <Servo.h>
 
-const int servoPin = 1;
+const int servoPin = 2;
 Servo servo1;
 void lock_pos()
 {
