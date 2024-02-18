@@ -1,3 +1,5 @@
+#ifndef ESP_ULTRASONIC_h
+#define ESP_ULTRASONIC_h
 const int trigPin = 12;
 const int echoPin = 14;
 
@@ -20,3 +22,4 @@ bool monitor()
 
     return distanceCm <= 75.0;
 }
+#endif
