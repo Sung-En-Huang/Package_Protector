@@ -18,8 +18,9 @@ const int motor4Pin = 0;
 // Object initialization
 Stepper myStepper(stepsPerRevolution, motor1Pin, motor2Pin, motor3Pin, motor4Pin);
 // Function definition
-int angleToSteps(int angle){
-  return (angle*stepsPerRevolution)/anglePerRevolution;
+int angleToSteps(int angle)
+{
+  return (angle * stepsPerRevolution) / anglePerRevolution;
 }
 
 // void stepInit(){
@@ -27,12 +28,14 @@ int angleToSteps(int angle){
 //   int stepsToMove = angleToSteps(lidOpenAngle);
 //   int stepChunk = stepsToMove/10;
 // }
-void openLid(){
+void openLid()
+{
   int stepCount = 0; // track steps taken
   int stepsToMove = angleToSteps(lidOpenAngle);
-  int stepChunk = stepsToMove/10;
+  int stepChunk = stepsToMove / 10;
 
-  while(stepCount < stepsToMove) {
+  while (stepCount < stepsToMove)
+  {
     // Move in chunks
     myStepper.step(stepChunk);
     stepCount += stepChunk;
@@ -41,12 +44,14 @@ void openLid(){
   delay(1000);
 }
 
-void closeLid(){
+void closeLid()
+{
   int stepCount = 0; // track steps taken
   int stepsToMove = angleToSteps(lidOpenAngle);
-  int stepChunk = stepsToMove/10;
+  int stepChunk = stepsToMove / 10;
 
-  while(stepCount > stepsToMove) {
+  while (stepCount > stepsToMove)
+  {
     // Move in chunks
     myStepper.step(stepChunk);
     stepCount -= stepChunk;
