@@ -6,6 +6,7 @@ void setup()
     Serial.begin(115200);
     pinMode(trigPin, OUTPUT);
     pinMode(echoPin, INPUT);
+    servo1.attach(servoPin, 500, 2400);
     servo1.write(0);
 }
 

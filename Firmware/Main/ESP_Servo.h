@@ -1,11 +1,10 @@
 #ifndef ESP_SERVO_H
 #define ESP_SERVO_H
+
 #include <Servo.h>
 
-Servo servo1;
 const int servoPin = 1;
-servo1.attach(servoPin, 500, 2400);
-
+Servo servo1;
 void lock_pos()
 {
     servo1.write(0);
