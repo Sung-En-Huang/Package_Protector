@@ -3,7 +3,6 @@
   Complete project details at https://randomnerdtutorials.com  
 *********/
 
-// Load Wi-Fi library
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
