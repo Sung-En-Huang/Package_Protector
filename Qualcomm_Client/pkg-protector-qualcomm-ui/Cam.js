@@ -53,14 +53,15 @@ const CameraScreen = () => {
 const styles = StyleSheet.create({
   cam: {
     flex: 1,
-    width: "100%",
+    // width: "100%",
   },
   outer: {
     flex: 1,
   },
   top: {
     flex: 1,
-    maxHeight: "35%",
+    maxHeight: "90%",
+    width: "100%",
   },
 });
 
