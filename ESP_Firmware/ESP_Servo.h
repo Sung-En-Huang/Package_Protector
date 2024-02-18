@@ -3,6 +3,7 @@
 
 #include <Servo.h>
 
+const servoPin = 1;
 void lock_pos(Servo servo1)
 {
     servo1.write(0);
