@@ -11,11 +11,17 @@ const int echoPin = 14;
 
 long duration;
 float distanceCm;
+<<<<<<< Updated upstream
 unsigned long startTime = 0;  // Variable to store the start time
 unsigned long elapsedTime = 0;  // Variable to store the elapsed time
 const char* url =  "http://100.66.153.218:3000/hello";
+=======
+unsigned long startTime = 0;   // Variable to store the start time
+unsigned long elapsedTime = 0; // Variable to store the elapsed time
+const char *url = "http://100.66.153.218:3000/hello";
+>>>>>>> Stashed changes
 
-bool monitor(bool approved)
+bool monitor()
 {
     digitalWrite(trigPin, LOW);
     delayMicroseconds(2);
@@ -71,5 +77,23 @@ bool monitor(bool approved)
     } 
 
     return distanceCm <= 75.0;
+}
+
+bool timeCounter()
+{
+    if (startTime == 0)
+    {
+        // Serial.println("millis");
+        startTime = millis();
+    }
+    elapsedTime = millis() - startTime;
+
+    if (elapsedTime >= 3000)
+    {
+        startTime = 0;
+        return true;
+    } else {
+      return false;
+    }
 }
 #endif
