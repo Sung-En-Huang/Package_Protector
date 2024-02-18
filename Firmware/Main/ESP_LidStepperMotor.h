@@ -1,63 +1,37 @@
 #ifndef ESP_LIDSTEPPERMOTOR_H
 #define ESP_LIDSTEPPERMOTOR_H
 
-#include <Stepper.h>
+#include <AccelStepper.h>
 
-const int stepsPerRevolution = 2048; // total steps per revolution
-// const int stepChunk = 10; // steps to take in each chunk
+const int stepsPerRevolution = 2048;  // change this to fit the number of steps per revolution
 const int anglePerRevolution = 360;
-const int lidOpenAngle = 90;
-const int lidCloseAngle = -90;
-
-// Motor Driver Pin Definition
-const int motor1Pin = 16;
-const int motor2Pin = 5;
-const int motor3Pin = 4;
-const int motor4Pin = 0;
+const int openLidAngle = -120;
+const int closeLidAngle = -openLidAngle;
+// ULN2003 Motor Driver Pins
+#define IN1 5
+#define IN2 4
+#define IN3 14
+#define IN4 12
 
 // Object initialization
-Stepper myStepper(stepsPerRevolution, motor1Pin, motor2Pin, motor3Pin, motor4Pin);
+AccelStepper stepper(AccelStepper::HALF4WIRE, IN1, IN3, IN2, IN4);
 // Function definition
-int angleToSteps(int angle)
-{
+int angleToStep(int angle){
   return (angle * stepsPerRevolution) / anglePerRevolution;
 }
-
-// void stepInit(){
-//   // int stepCount = 0;
-//   int stepsToMove = angleToSteps(lidOpenAngle);
-//   int stepChunk = stepsToMove/10;
-// }
-void openLid()
-{
-  int stepCount = 0; // track steps taken
-  int stepsToMove = angleToSteps(lidOpenAngle);
-  int stepChunk = stepsToMove / 10;
-
-  while (stepCount < stepsToMove)
-  {
-    // Move in chunks
-    myStepper.step(stepChunk);
-    stepCount += stepChunk;
-    delay(100);
+void openLid(){
+  stepper.move(angleToStep(openLidAngle));
+  while(stepper.distanceToGo() != 0){
+    stepper.run();
+    yield();
   }
-  delay(1000);
 }
-
-void closeLid()
-{
-  int stepCount = 0; // track steps taken
-  int stepsToMove = angleToSteps(lidOpenAngle);
-  int stepChunk = stepsToMove / 10;
-
-  while (stepCount > stepsToMove)
-  {
-    // Move in chunks
-    myStepper.step(stepChunk);
-    stepCount -= stepChunk;
-    delay(100);
+void closeLid(){
+  stepper.move(angleToStep(closeLidAngle));
+  while(stepper.distanceToGo() != 0){
+    stepper.run();
+    yield();
   }
-  delay(1000);
 }
 
 #endif
